@@ -6,7 +6,7 @@ use std::net::{TcpListener, TcpStream};
 
 // localhost
 const MSG_SIZE: usize = 32;
-const LOCAL: &str = "https://protected-everglades-84717.herokuapp.com:80";
+const LOCAL: &str = "https://protected-everglades-84717.herokuapp.com:4001";
 
 fn thread_sleep() {
     thread::sleep(std::time::Duration::from_millis(120));
