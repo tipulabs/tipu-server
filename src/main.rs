@@ -1,19 +1,22 @@
+use std::env;
 use std::thread;
 use std::vec::Vec;
 use std::sync::{Arc, Mutex};
 use std::io::{ErrorKind, Read, Write};
 use std::net::{TcpListener, TcpStream};
 
-// localhost
 const MSG_SIZE: usize = 32;
-const LOCAL: &str = "https://protected-everglades-84717.herokuapp.com:4001";
 
 fn thread_sleep() {
     thread::sleep(std::time::Duration::from_millis(120));
 }
 
 fn main() {
-    let server = TcpListener::bind(LOCAL).expect("Couldn't bind to host");
+    let post = env::var("PORT").unwrap_or_else(|_| "6000".to_string());
+    let address = format!("0.0.0.0:{}", post);
+    println!("Server running on: {}", address);
+
+    let server = TcpListener::bind(address).expect("Couldn't bind to host");
     server
         .set_nonblocking(true)
         .expect("Error setting server to non blocking");
